@@ -1,14 +1,3 @@
-% ============================================================
-% DCIT 313 - Crop Disease Expert System
-% Knowledge Base (kb.pl)
-% ============================================================
-% DIAGNOSIS LOGIC:
-% For each disease, ALL 3 symptoms are presented together.
-% If the farmer confirms that group, the disease is diagnosed.
-% ============================================================
-
-% disease_info(Crop, Disease, [Symptom1, Symptom2, Symptom3], Description, Recommendation)
-
 % MAIZE DISEASES
 
 disease_info(maize, 'Maize Rust',
