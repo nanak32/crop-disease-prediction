@@ -34,7 +34,7 @@ WINDOW_HEIGHT = 680
 MIN_WIDTH = 700
 MIN_HEIGHT = 580
 
-WINDOW_TITLE = "Crop Disease PredictionExpert System — DCIT 313"
+WINDOW_TITLE = "Crop Disease Prediction Expert System"
 FOOTER_TEXT = "INNOVATIVE MINDS - GROUP 25"
 
 # CROPS
