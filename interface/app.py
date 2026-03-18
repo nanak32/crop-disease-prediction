@@ -42,7 +42,7 @@ class ExpertSystemApp(tk.Tk):
         # Show crop selection screen
         self._screen_crop_select()
 
-    # ── FONTS ────────────────────────────────────────────────
+    # FONTS 
 
     def _setup_fonts(self):
         self.f_title = tkfont.Font(family="Georgia", size=20, weight="bold")
@@ -55,7 +55,7 @@ class ExpertSystemApp(tk.Tk):
         self.f_small = tkfont.Font(family="Courier New", size=9)
         self.f_counter = tkfont.Font(family="Courier New", size=9)
 
-    # ── SHELL ────────────────────────────────────────────────
+    # SHELL
 
     def _build_shell(self):
         # Header bar
@@ -65,7 +65,7 @@ class ExpertSystemApp(tk.Tk):
 
         tk.Label(
             hdr,
-            text="🌿 CROP DISEASE EXPERT SYSTEM",
+            text="CROP DISEASE PREDICTION EXPERT SYSTEM",
             font=self.f_title,
             bg=C["panel"],
             fg=C["accent"],
@@ -97,7 +97,7 @@ class ExpertSystemApp(tk.Tk):
         w = self.content.winfo_width() or self.winfo_width()
         self.progress_bar.config(width=int(w * fraction))
 
-    # ── SCREEN: CROP SELECTION ──────────────────────────────
+    # SCREEN: CROP SELECTION
 
     def _screen_crop_select(self):
         self._clear_content()
@@ -116,7 +116,7 @@ class ExpertSystemApp(tk.Tk):
         ).pack(pady=(0, 8))
         tk.Label(
             outer,
-            text="Select a crop to begin the diagnostic session.",
+            text="Select a crop to begin.",
             font=self.f_sub,
             bg=C["bg"],
             fg=C["text_dim"],
@@ -167,7 +167,7 @@ class ExpertSystemApp(tk.Tk):
             fg=C["border"],
         ).pack(pady=(48, 0))
 
-    # ── START DIAGNOSIS ──────────────────────────────────────
+    # START DIAGNOSIS 
 
     def _start_diagnosis(self, crop: str):
         self.crop = crop
@@ -177,7 +177,7 @@ class ExpertSystemApp(tk.Tk):
         self.lbl_crop_badge.config(text=f"  {crop.upper()}  ")
         self._screen_question()
 
-    # ── SCREEN: QUESTION ─────────────────────────────────────
+    # SCREEN: QUESTION
 
     def _screen_question(self):
         self._clear_content()
@@ -233,7 +233,7 @@ class ExpertSystemApp(tk.Tk):
         name_bar.pack(fill="x")
         tk.Label(
             name_bar,
-            text=f"  Is your {self.crop} crop showing these symptoms?",
+            text=f"  Is your {self.crop} crop showing any of these symptoms?",
             font=self.f_label,
             bg=C["accent_dark"],
             fg=C["text_dim"],
@@ -246,7 +246,7 @@ class ExpertSystemApp(tk.Tk):
 
         tk.Label(
             sym_frame,
-            text="Presenting symptoms:",
+            text="Symptoms:",
             font=self.f_label,
             bg=C["card"],
             fg=C["text_dim"],
@@ -279,7 +279,7 @@ class ExpertSystemApp(tk.Tk):
 
         yes_btn = self._make_btn(
             btn_row,
-            "✓  YES — Confirm These Symptoms",
+            "YES",
             C["accent"],
             C["accent_dark"],
             lambda: self._answer(True, disease_name, info),
@@ -288,7 +288,7 @@ class ExpertSystemApp(tk.Tk):
 
         no_btn = self._make_btn(
             btn_row,
-            "✗  NO — Not These Symptoms",
+            "NO",
             C["danger"],
             C["danger_dark"],
             lambda: self._answer(False, disease_name, info),
@@ -298,7 +298,7 @@ class ExpertSystemApp(tk.Tk):
         # Hint
         tk.Label(
             wrapper,
-            text="Answer YES if the crop is showing at least these symptoms. Answer NO to check the next disease.",
+            text="Answer YES if the crop is showing at least these symptoms. Answer NO to move on to the next.",
             font=self.f_small,
             bg=C["bg"],
             fg=C["border"],
@@ -331,7 +331,7 @@ class ExpertSystemApp(tk.Tk):
         btn.bind("<Leave>", _leave)
         return btn
 
-    # ── ANSWER HANDLER ───────────────────────────────────────
+    # ANSWER HANDLER 
 
     def _answer(self, confirmed: bool, disease_name: str, info: dict):
         if confirmed:
@@ -339,7 +339,7 @@ class ExpertSystemApp(tk.Tk):
         self.disease_idx += 1
         self._screen_question()
 
-    # ── SCREEN: RESULTS ──────────────────────────────────────
+    # SCREEN: RESULTS
 
     def _screen_results(self):
         self._clear_content()
@@ -358,7 +358,13 @@ class ExpertSystemApp(tk.Tk):
 
         scroll_frame.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
 
-        canvas.create_window((0, 0), window=scroll_frame, anchor="nw")
+        canvas_window = canvas.create_window((0, 0), window=scroll_frame, anchor="nw")
+
+        
+        def _resize_scroll_frame(event):
+            canvas.itemconfig(canvas_window, width=event.width)
+
+        canvas.bind("<Configure>", _resize_scroll_frame)
         canvas.configure(yscrollcommand=scrollbar.set)
 
         scrollbar.pack(side="right", fill="y")
@@ -379,14 +385,14 @@ class ExpertSystemApp(tk.Tk):
         num_found = len(self.confirmed)
 
         if num_found > 0:
-            headline = f"⚠  {num_found} Disease{'s' if num_found > 1 else ''} Identified"
+            headline = f" {num_found} Disease{'s' if num_found > 1 else ''} Identified"
             h_color = C["gold"]
         else:
-            headline = "✅  No Diseases Matched"
+            headline = "No Diseases Matched"
             h_color = C["accent"]
 
         tk.Label(inner, text=headline, font=self.f_disease, bg=C["bg"], fg=h_color).pack(
-            anchor="w", pady=(0, 4)
+            pady=(0, 4)
         )
         tk.Label(
             inner,
@@ -394,7 +400,7 @@ class ExpertSystemApp(tk.Tk):
             font=self.f_sub,
             bg=C["bg"],
             fg=C["text_dim"],
-        ).pack(anchor="w", pady=(0, 20))
+        ).pack(pady=(0, 20))
 
         if num_found == 0:
             no_card = tk.Frame(
@@ -406,7 +412,6 @@ class ExpertSystemApp(tk.Tk):
                 text=(
                     "Your crop did not match any of the known disease patterns.\n"
                     "It may be healthy, or the symptoms may not yet be apparent.\n"
-                    "Consider consulting a local agricultural extension officer."
                 ),
                 font=self.f_body,
                 bg=C["result_neg"],
@@ -418,25 +423,11 @@ class ExpertSystemApp(tk.Tk):
             for i, (disease_name, info) in enumerate(self.confirmed, 1):
                 self._render_result_card(inner, i, disease_name, info)
 
-        # Disclaimer
-        disc = tk.Frame(
-            inner, bg=C["panel"], highlightthickness=1, highlightbackground=C["border"]
-        )
-        disc.pack(fill="x", pady=(20, 4))
-        tk.Label(
-            disc,
-            text="⚠  DISCLAIMER: This system is a diagnostic aid only. "
-            "Consult a certified agronomist for confirmation and treatment.",
-            font=self.f_small,
-            bg=C["panel"],
-            fg=C["text_dim"],
-            wraplength=680,
-            justify="left",
-        ).pack(padx=20, pady=12)
+       
 
         # Restart button
         self._make_btn(
-            inner, "← Start New Diagnosis", C["accent_dark"], C["accent"], self._restart
+            inner, "Start New Diagnosis", C["accent_dark"], C["accent"], self._restart
         ).pack(pady=16, ipadx=10, ipady=6)
 
     def _render_result_card(self, parent, idx, disease_name, info):
@@ -510,7 +501,7 @@ class ExpertSystemApp(tk.Tk):
         )
         rec_frame.pack(fill="x")
         tk.Label(
-            rec_frame, text="  💊 RECOMMENDATION", font=self.f_label, bg="#1A2D10", fg=C["accent"]
+            rec_frame, text="💊 RECOMMENDATION", font=self.f_label, bg="#1A2D10", fg=C["accent"]
         ).pack(anchor="w", padx=12, pady=(10, 4))
         tk.Label(
             rec_frame,
@@ -521,9 +512,9 @@ class ExpertSystemApp(tk.Tk):
             wraplength=680,
             justify="left",
             anchor="w",
-        ).pack(padx=16, pady=(0, 12))
+        ).pack(fill="x", padx=12, pady=(0, 12))
 
-    # ── RESTART ──────────────────────────────────────────────
+    # RESTART 
 
     def _restart(self):
         self.crop = None
@@ -532,7 +523,7 @@ class ExpertSystemApp(tk.Tk):
         self.confirmed = []
         self._screen_crop_select()
 
-    # ── FATAL ERROR ──────────────────────────────────────────
+    # FATAL ERROR
 
     def _fatal(self, msg):
         self._clear_content()
