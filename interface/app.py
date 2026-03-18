@@ -529,7 +529,7 @@ class ExpertSystemApp(tk.Tk):
         self._clear_content()
         tk.Label(
             self.content,
-            text="❌  Failed to load Knowledge Base",
+            text="Failed to load Knowledge Base",
             font=self.f_disease,
             bg=C["bg"],
             fg=C["danger"],
