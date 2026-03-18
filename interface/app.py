@@ -1,7 +1,3 @@
-"""
-Expert System Application: Tkinter-based UI for crop disease diagnosis
-"""
-
 import tkinter as tk
 from tkinter import font as tkfont
 
@@ -10,7 +6,6 @@ from knowledge_base import KnowledgeBase
 
 
 class ExpertSystemApp(tk.Tk):
-    """Main Tkinter application for the crop disease expert system."""
 
     def __init__(self):
         super().__init__()

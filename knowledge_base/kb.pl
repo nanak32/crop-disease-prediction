@@ -152,9 +152,6 @@ disease_info(tomato, 'Damping Off',
     'A fungal complex killing seedlings at or below soil level causing poor stand establishment.',
     'Use sterile potting mix. Improve drainage. Apply fungicide drench. Avoid overwatering. Ensure good air circulation.').
 
-% ============================================================
-% QUERY PREDICATES (called from Python interface)
-% ============================================================
 
 get_all_diseases(Crop, Diseases) :-
     findall(D, disease_info(Crop, D, _, _, _), Diseases).

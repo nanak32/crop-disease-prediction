@@ -35,7 +35,7 @@ MIN_WIDTH = 700
 MIN_HEIGHT = 580
 
 WINDOW_TITLE = "Crop Disease PredictionExpert System — DCIT 313"
-FOOTER_TEXT = "DCIT 313  |  Knowledge-Based System  |  Prolog + Python"
+FOOTER_TEXT = "INNOVATIVE MINDS - GROUP 25"
 
 # CROPS
 
