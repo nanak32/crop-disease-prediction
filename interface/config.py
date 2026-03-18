@@ -8,22 +8,22 @@ KB_PATH = os.path.join(SCRIPT_DIR, "..", "knowledge_base", "kb.pl")
 # COLOUR PALETTE
 
 COLORS = {
-    "bg":          "#1A1F14",   # deep forest black-green
-    "panel":       "#242B1A",   # slightly lighter panel
-    "card":        "#2D3622",   # question card
-    "accent":      "#7FB347",   # fresh leaf green
-    "accent_dark": "#5A8030",   # pressed state
-    "danger":      "#C0392B",   # No button
+    "bg":          "#1A1F14",   
+    "panel":       "#242B1A",   
+    "card":        "#2D3622",   
+    "accent":      "#7FB347",   
+    "accent_dark": "#5A8030",   
+    "danger":      "#C0392B",   
     "danger_dark": "#922B21",
-    "text":        "#E8F0DC",   # off-white
-    "text_dim":    "#8FA67A",   # muted text
-    "gold":        "#D4A843",   # disease name highlight
-    "border":      "#3D4A2A",   # subtle border
+    "text":        "#E8F0DC",   
+    "text_dim":    "#8FA67A",   
+    "gold":        "#D4A843",   
+    "border":      "#3D4A2A",   
     "white":       "#FFFFFF",
-    "symptom_bg":  "#1F2918",   # symptom chip background
-    "symptom_txt": "#B2D48A",   # symptom chip text
-    "result_pos":  "#2A3D1A",   # positive result background
-    "result_neg":  "#1E1E1E",   # no disease bg
+    "symptom_bg":  "#1F2918",   
+    "symptom_txt": "#B2D48A",   
+    "result_pos":  "#2A3D1A",   
+    "result_neg":  "#1E1E1E",   
     "scrollbar":   "#3A4528",
 }
 
